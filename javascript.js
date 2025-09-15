@@ -1,4 +1,4 @@
-console.log("Recursion Testing:");
+console.log("Recursion Testing: Iterative");
 
 function fibs(num) {
     let fibArray = [0, 1];
@@ -10,24 +10,33 @@ function fibs(num) {
     return fibArray;
 }
 
-function fibsRec(num, array = []) {
+console.log(fibs(8));
 
+function fibsRec(num) {
 
-    if (num < 2) {
-        return num;
+    let resultsArray = [];
+
+    function recursion(num) {
+        if (num < 2) {
+            return num;
+        }
+        else {
+            let first = recursion(num - 1);
+            let second = recursion(num - 2);
+            resultsArray[num - 1] = first;
+            resultsArray[num - 2] = second;
+            resultsArray[num] = first + second;
+            return first + second;
+        }
     }
-    if (num >= 2) {
-        let first = fibsRec(num - 1, array);
-        let second = fibsRec(num - 2, array);
-        array[num - 1] = first;
-        array[num - 2] = second;
-        array[num] = first + second;
-        console.log(array);
-        return first + second;
-    }
-    if (num === num) {
-        return array;
-    }
+
+    recursion(num);
+
+    resultsArray.pop();
+
+    return resultsArray;
+    
 }
 
-console.log(fibsRec(6));
+console.log("Recursion Testing: Recursive");
+console.log(fibsRec(8));
