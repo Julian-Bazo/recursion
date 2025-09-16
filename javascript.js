@@ -1,4 +1,4 @@
-console.log("Recursion Testing: Iterative");
+// console.log("Recursion Testing: Iterative");
 
 function fibs(num) {
     let fibArray = [0, 1];
@@ -10,7 +10,7 @@ function fibs(num) {
     return fibArray;
 }
 
-console.log(fibs(8));
+// console.log(fibs(8));
 
 function fibsRec(num) {
 
@@ -38,38 +38,48 @@ function fibsRec(num) {
     
 }
 
-console.log("Recursion Testing: Recursive");
-console.log(fibsRec(8));
+// console.log("Recursion Testing: Recursive");
+// console.log(fibsRec(8));
+
+
+test1 = [3, 2, 1, 13, 8, 5, 0, 1];
+console.log(`Tested Array: ${test1}`);
 
 function mergeSort(array) {
     
     let mergedArray = [];
 
-    function merge(array) {
-    let mainLength = array.length;
-    let halfLength = mainLength/2;
+    function merge(array, tempArray = []) {
+        let mainLength = array.length;
+        let halfLength = mainLength/2;
 
-    let leftSideArray = array.slice(0, halfLength);
-    let rightSideArray = array.slice(halfLength);
+        let leftSideArray = array.slice(0, halfLength);
+        let rightSideArray = array.slice(halfLength);
 
-    if (leftSideArray.length === 1 && rightSideArray === 1){
-        array = [];
-        if (leftSideArray[0] < rightSideArray[0]) {
-            array.push(leftSideArray[0]);
-            array.push(rightSideArray[0]);
+        if (leftSideArray.length === 1) {
+            console.log("Single left");
+            console.log(tempArray);
+
+            if (leftSideArray[0] < rightSideArray[0]) {
+                tempArray.push(leftSideArray[0]);
+                tempArray.push(rightSideArray[0]);
+            }
+            else {
+                tempArray.push(rightSideArray[0]);
+                tempArray.push(leftSideArray[0]);
+            }
+            return tempArray;
         }
+
         else {
-            array.push(rightSideArray[0]);
-            array.push(leftSideArray[0]);
+            console.log("Split left side");
+            merge(leftSideArray, tempArray);
+            merge(rightSideArray, tempArray);
+            console.log(tempArray);
         }
-        return array;
-    }
-    else {
-        merge(array);
-    }
 
-    // console.log(leftSideArray);
-    // console.log(rightSideArray);
+        // console.log(leftSideArray);
+        // console.log(rightSideArray);
     }
 
     merge(array);
@@ -78,5 +88,7 @@ function mergeSort(array) {
 
 }
 
-test1 = [3, 2, 1, 13, 8, 5, 0, 1];
+
 mergeSort(test1);
+
+// 1 is greater than undefined, check if temp array has stuff
