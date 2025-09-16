@@ -48,48 +48,48 @@ console.log(`Tested Array: ${test1}`);
 
 
 function mergeSort(array) {
-    let mainLength = array.length;
-    let halfLength = Math.floor(mainLength/2);
-
-    if (mainLength <= 1) {
+    let length = array.length;
+    
+    if (length <= 1) {
         return array;
     }
+    else {
+        let halfLength = Math.floor(length/2);
+        let left = mergeSort(array.slice(0, halfLength));
+        let right = mergeSort(array.slice(halfLength));
 
-    let left = mergeSort(array.slice(0, halfLength));
-    let right = mergeSort(array.slice(halfLength));
+        return mergeTwo(left, right);
 
-    return mergeTwo(left, right);
-
+    }
 }
 
 function mergeTwo(left, right) {
-    let sortedArray = [];
-
+    let sorted = [];
     let i = 0;
     let j = 0;
 
     while (i < left.length && j < right.length) {
-        if (left[i] <= right[j]) {
-            sortedArray.push(left[i]);
+        if (left[i] < right[j]){
+            sorted.push(left[i]);
             i++
         }
         else {
-            sortedArray.push(right[j]);
-            j++;
-        } 
+            sorted.push(right[j]);
+            j++
+        }
     }
 
     while (i < left.length) {
-        sortedArray.push(left[i]);
+        sorted.push(left[i]);
         i++
     }
 
     while (j < right.length) {
-        sortedArray.push(right[j]);
+        sorted.push(right[j]);
         j++
     }
 
-    return sortedArray;
+    return sorted;
 }
 
 
