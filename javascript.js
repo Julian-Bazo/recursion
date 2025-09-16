@@ -42,53 +42,57 @@ function fibsRec(num) {
 // console.log(fibsRec(8));
 
 
+
 test1 = [3, 2, 1, 13, 8, 5, 0, 1];
 console.log(`Tested Array: ${test1}`);
 
+
 function mergeSort(array) {
-    
-    let mergedArray = [];
+    let mainLength = array.length;
+    let halfLength = Math.floor(mainLength/2);
 
-    function merge(array, tempArray = []) {
-        let mainLength = array.length;
-        let halfLength = mainLength/2;
-
-        let leftSideArray = array.slice(0, halfLength);
-        let rightSideArray = array.slice(halfLength);
-
-        if (leftSideArray.length === 1) {
-            console.log("Single left");
-            console.log(tempArray);
-
-            if (leftSideArray[0] < rightSideArray[0]) {
-                tempArray.push(leftSideArray[0]);
-                tempArray.push(rightSideArray[0]);
-            }
-            else {
-                tempArray.push(rightSideArray[0]);
-                tempArray.push(leftSideArray[0]);
-            }
-            return tempArray;
-        }
-
-        else {
-            console.log("Split left side");
-            merge(leftSideArray, tempArray);
-            merge(rightSideArray, tempArray);
-            console.log(tempArray);
-        }
-
-        // console.log(leftSideArray);
-        // console.log(rightSideArray);
+    if (mainLength <= 1) {
+        return array;
     }
 
-    merge(array);
+    let left = mergeSort(array.slice(0, halfLength));
+    let right = mergeSort(array.slice(halfLength));
 
-    return mergedArray;
+    return mergeTwo(left, right);
 
 }
 
+function mergeTwo(left, right) {
+    let sortedArray = [];
 
-mergeSort(test1);
+    let i = 0;
+    let j = 0;
+
+    while (i < left.length && j < right.length) {
+        if (left[i] <= right[j]) {
+            sortedArray.push(left[i]);
+            i++
+        }
+        else {
+            sortedArray.push(right[j]);
+            j++;
+        } 
+    }
+
+    while (i < left.length) {
+        sortedArray.push(left[i]);
+        i++
+    }
+
+    while (j < right.length) {
+        sortedArray.push(right[j]);
+        j++
+    }
+
+    return sortedArray;
+}
+
+
+console.log(mergeSort(test1));
 
 // 1 is greater than undefined, check if temp array has stuff
