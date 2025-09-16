@@ -40,3 +40,43 @@ function fibsRec(num) {
 
 console.log("Recursion Testing: Recursive");
 console.log(fibsRec(8));
+
+function mergeSort(array) {
+    
+    let mergedArray = [];
+
+    function merge(array) {
+    let mainLength = array.length;
+    let halfLength = mainLength/2;
+
+    let leftSideArray = array.slice(0, halfLength);
+    let rightSideArray = array.slice(halfLength);
+
+    if (leftSideArray.length === 1 && rightSideArray === 1){
+        array = [];
+        if (leftSideArray[0] < rightSideArray[0]) {
+            array.push(leftSideArray[0]);
+            array.push(rightSideArray[0]);
+        }
+        else {
+            array.push(rightSideArray[0]);
+            array.push(leftSideArray[0]);
+        }
+        return array;
+    }
+    else {
+        merge(array);
+    }
+
+    // console.log(leftSideArray);
+    // console.log(rightSideArray);
+    }
+
+    merge(array);
+
+    return mergedArray;
+
+}
+
+test1 = [3, 2, 1, 13, 8, 5, 0, 1];
+mergeSort(test1);
